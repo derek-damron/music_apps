@@ -1,0 +1,16 @@
+# AWS SAM (or CloudFormation) template placeholder.
+# Use this to define Lambda functions, API Gateway, ECS tasks, and IAM roles.
+# Build: uv export --no-dev -o requirements.txt; then package deps for Lambda.
+# See plan: run apps via Lambda (event-driven) or ECS (long-running).
+
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: music_apps - Lambda/API placeholder
+
+Resources:
+  # Example: PracticeSheetsFunction
+  # Type: AWS::Serverless::Function
+  # Properties:
+  #   Handler: apps.practice_sheets.main.lambda_handler
+  #   Runtime: python3.11
+  #   ...

@@ -1,0 +1,28 @@
+[project]
+name = "music-apps"
+version = "0.1.0"
+description = "AI-powered music applications: practice sheets, metronome, wave sequencer"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "python-dotenv>=1.0.0",
+    "boto3>=1.34.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.4.0",
+]
+
+[project.scripts]
+music-practice-sheets = "apps.practice_sheets.main:main"
+music-metronome = "apps.metronome.main:main"
+music-wave-sequencer = "apps.wave_sequencer.main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["apps", "lib"]
