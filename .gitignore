@@ -157,6 +157,9 @@ venv.bak/
 # mkdocs documentation
 /site
 
+# Generated PDFs (e.g. practice sheets)
+*.pdf
+
 # mypy
 .mypy_cache/
 .dmypy.json
