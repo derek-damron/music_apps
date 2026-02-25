@@ -16,8 +16,8 @@ HALF_HEIGHT = PAGE_HEIGHT / 2
 
 def export_to_pdf(grid_data: GridData, path: str | Path) -> None:
     """
-    Render one page: top half = scale name, 6×4 grid, numbers 1–7;
-    bottom half = horizontal ruled lines for notes.
+    Render one page: header and 6×4 grid, then numbers 1–7 each with 3 full-width lines
+    filling the remainder of the page.
     """
     path = Path(path)
     c = canvas.Canvas(str(path), pagesize=letter)
@@ -63,20 +63,26 @@ def export_to_pdf(grid_data: GridData, path: str | Path) -> None:
     t.wrapOn(c, content_width, table_height)
     t.drawOn(c, margin, table_y)
 
-    # Numbers 1 2 3 4 5 6 7 for marking practice days
-    c.setFont("Helvetica", 10)
-    days_y = table_y - 0.35 * inch
-    c.drawString(margin, days_y, "Practice days:")
-    c.drawString(margin + 1.2 * inch, days_y, "1  2  3  4  5  6  7")
-
-    # --- Bottom half (lower 50%): ruled lines for notes ---
-    line_spacing = 0.35 * inch
-    num_lines = int((HALF_HEIGHT - 2 * margin) / line_spacing)
+    # Practice days 1–7: label then each number + 3 full-width lines, filling remainder of page
+    num_blocks = 7
     left_x = margin
     right_x = PAGE_WIDTH - margin
-    y = HALF_HEIGHT - margin
-    for _ in range(num_lines):
-        c.line(left_x, y, right_x, y)
-        y -= line_spacing
+    label_space = 0.35 * inch
+    section_top = table_y - label_space
+    c.setFont("Helvetica", 10)
+    c.drawString(left_x, table_y - 0.2 * inch, "Practice days:")
+    available_height = section_top - margin
+    block_height = available_height / num_blocks
+    line_spacing_notes = 0.2 * inch
+    for i in range(num_blocks):
+        block_top = section_top - i * block_height
+        number_y = block_top - 0.15 * inch
+        line1_y = number_y - 0.15 * inch
+        line2_y = line1_y - line_spacing_notes
+        line3_y = line2_y - line_spacing_notes
+        c.drawString(left_x, number_y, str(i + 1))
+        c.line(left_x, line1_y, right_x, line1_y)
+        c.line(left_x, line2_y, right_x, line2_y)
+        c.line(left_x, line3_y, right_x, line3_y)
 
     c.save()
