@@ -1,0 +1,31 @@
+---
+description: Use uv as the Python dependency manager for this repo
+alwaysApply: true
+---
+
+# Python dependency management (uv)
+
+## General
+
+- This repository uses **uv** as the primary Python dependency and environment manager.
+- When running Python code, prefer `uv run` over plain `python`.
+- When installing or updating dependencies, prefer `uv pip` over plain `pip`.
+
+## Command conventions
+
+- **Running apps / scripts**
+  - Use: `uv run python -m apps.metronome.main --bpm 120`
+  - Avoid: `python -m apps.metronome.main --bpm 120`
+
+- **Installing packages**
+  - Use: `uv pip install sounddevice`
+  - Avoid: `pip install sounddevice`
+
+## Assistant guidance
+
+- When suggesting commands in this repo:
+  - Default to `uv run` and `uv pip` forms.
+  - Assume required Python packages are managed via uv, not system `pip` or venvs, unless the user explicitly states otherwise.
+- When debugging “module not found” issues:
+  - First suggest installing the package with `uv pip install <package>` in this project.
+
