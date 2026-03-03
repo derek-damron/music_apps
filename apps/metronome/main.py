@@ -133,9 +133,7 @@ def _run_metronome(bpm: int) -> None:
         timer.join(timeout=1.0)
         t_after_join = time.perf_counter()
         _debug_log("join_returned", {"perf": t_after_join - start, "join_duration": t_after_join - t0_finally, "timer_alive": timer.is_alive()}, "H2")
-        total_sec = time.perf_counter() - start
         print()
-        print(f"Practice time: {_format_elapsed(total_sec)} ({bpm} BPM)")
 
 
 def _serve(bpm: int) -> None:
