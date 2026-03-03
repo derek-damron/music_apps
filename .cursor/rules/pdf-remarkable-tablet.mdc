@@ -1,0 +1,40 @@
+---
+description: PDF layout guidelines for ReMarkable/e-ink tablets when creating or editing PDF exports
+globs: "**/*pdf*.py"
+alwaysApply: false
+---
+
+# PDFs for ReMarkable and e-ink tablets
+
+Many PDFs from this repo may be consumed on a ReMarkable or similar 10" e-ink tablet rather than printed. The work-week planner in `apps/daily_planner/pdf_export.py` is one example; apply these guidelines to any PDF export.
+
+## Page size and margins
+
+- Letter-size pages scale to fit on tablet screens, which can shrink content and leave wasted margin. When designing for tablet use:
+  - Prefer **smaller margins** (e.g. ~0.5") when a tablet-first layout is acceptable.
+  - For a dedicated tablet variant, consider a **page size closer to the device** (custom pagesize, A5-like proportions); keep a print-safe variant if needed.
+
+## Typography and contrast
+
+- **Font sizes:** Section titles 12–14pt or larger. Normal labels (weekday letters, dates) at least 10pt; reserve 9pt for secondary info only.
+- **Highlights:** Use a **medium-light gray** that reads clearly on e-ink (e.g. ~0.75–0.8), not very light grays that disappear.
+- **Lines:** Use line width ≥ 0.8pt for grids and rules so they remain visible after scaling on e-ink.
+
+## Internal navigation and tap targets
+
+- Use **internal PDF links** (e.g. reportlab `linkRect` with named page bookmarks) for jumping between sections or days. ReMarkable supports internal link navigation.
+- **Do not rely on hover tooltips**—reMarkable does not show them; tooltip text is for desktop viewers only.
+- **Tap targets:** Link rectangles should be large enough to tap comfortably with pen or finger after scaling (roughly ≥ 0.3–0.4" in each dimension).
+
+## Handwriting areas and line spacing
+
+- For note and brain-dump sections, use **line spacing ~0.28–0.33"** for comfortable stylus writing.
+- Time-block columns: balance **row count** (e.g. 30-minute slots) with **column width** so a short phrase fits without constant zoom. Dense grids are fine, but the schedule column can feel narrow on tablets—design with that in mind.
+
+## Testing
+
+When adding or changing PDF exports, verify on a ReMarkable (or e-ink device) at "fit to page":
+
+- Text is legible; tap targets for internal links are easy to hit.
+- Highlights and grid lines are clearly visible.
+- Handwriting areas are neither cramped nor excessively sparse.
