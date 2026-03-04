@@ -17,7 +17,7 @@ def export_to_pdf(_: GridData, path: str | Path) -> None:
 
     Layout:
     - Top third: week focus area (3 lines) on the left and a fretboard outline on the right.
-    - Bottom two thirds: Sunday–Saturday labels on the left, each with 3 note lines on the right.
+    - Bottom two thirds: Sunday–Saturday labels on the left, each with 2 note lines on the right.
     """
     path = Path(path)
     c = canvas.Canvas(str(path), pagesize=letter)
@@ -125,20 +125,17 @@ def export_to_pdf(_: GridData, path: str | Path) -> None:
         # Align day label vertically with first note line; use same spacing as Week Focus Area
         line1_y = block_top - 0.2 * block_height
         line2_y = line1_y - note_line_spacing
-        line3_y = line2_y - note_line_spacing
 
-        if line3_y < block_bottom:
-            # Clamp so all lines stay within the block
-            overflow = block_bottom - line3_y
+        if line2_y < block_bottom:
+            # Clamp so both lines stay within the block
+            overflow = block_bottom - line2_y
             line1_y += overflow
             line2_y += overflow
-            line3_y += overflow
 
         day_label_y = line1_y  # align day label with first note line
         c.drawString(day_label_x, day_label_y, day)
 
         c.line(note_line_start_x, line1_y, note_line_end_x, line1_y)
         c.line(note_line_start_x, line2_y, note_line_end_x, line2_y)
-        c.line(note_line_start_x, line3_y, note_line_end_x, line3_y)
 
     c.save()
