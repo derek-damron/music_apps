@@ -1,0 +1,23 @@
+---
+description: Prefer using the GitHub MCP server for GitHub operations in this repo
+alwaysApply: true
+---
+
+# GitHub access via MCP
+
+- This project uses a GitHub MCP server for interacting with GitHub.
+- Server identifier: `user-github`.
+- When you need to read or modify anything on GitHub (issues, pull requests, code, gists, repository trees, searches, etc.), prefer using the `CallMcpTool` tool with `server: "user-github"`.
+- Before calling any MCP tool, always read its JSON schema from the MCP tool descriptors (for example in `mcps/user-github/tools/`) to understand parameters and behavior.
+- Do **not** use the `gh` CLI, `curl` requests, or direct HTTP calls to the GitHub REST/GraphQL APIs from this workspace unless higher-priority system instructions or the user explicitly require them.
+
+## Available capabilities
+
+The GitHub MCP server exposes tools such as (not exhaustive):
+- `list_issues`, `issue_read`, `issue_write`, `search_issues`
+- `list_pull_requests`, `pull_request_read`, `create_pull_request`, `update_pull_request`, `search_pull_requests`
+- `get_file_contents`, `get_repository_tree`, `search_code`
+- `add_issue_comment`
+- `get_me`
+- `create_gist`, `get_gist`, `list_gists`
+
