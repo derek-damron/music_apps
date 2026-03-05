@@ -207,6 +207,10 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
+# Repo-local Cursor files under .cursor/ starting with underscore that should remain untracked
+.cursor/_*
+.cursor/**/_*
+
 # Marimo
 marimo/_static/
 marimo/_lsp/
