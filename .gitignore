@@ -207,6 +207,9 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
+# Repo-local Cursor rules that should remain untracked
+.cursor/rules/github-mcp-local.mdc
+
 # Marimo
 marimo/_static/
 marimo/_lsp/
